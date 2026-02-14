@@ -1,0 +1,361 @@
+:root {
+    --primary-red: #D32F2F;
+    --dark-red: #8B0000;
+    --light-red: #FF5252;
+    --gold: #FFD700;
+    --white: #FFFFFF;
+}
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #8B0000;
+    /* Dark red base */
+    font-family: 'Outfit', 'Inter', sans-serif;
+}
+
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    transition: background 1.5s ease-in-out, opacity 1s ease;
+}
+
+.background-container.soft-red {
+    background: radial-gradient(circle at center, #FF5252 0%, #D32F2F 50%, #8B0000 100%) !important;
+    opacity: 1 !important;
+    display: block !important;
+}
+
+.background-container.red-theme {
+    background: radial-gradient(circle at center, #FF4D4D 0%, #8B0000 100%);
+}
+
+.background-container.bold-red {
+    background: radial-gradient(circle at center, #FF0000 0%, #4B0000 100%);
+}
+
+.background-container.soft-red::before,
+.background-container.soft-red::after {
+    content: '';
+    position: absolute;
+    width: 250%;
+    height: 250%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 70%);
+    /* More visible floating white clouds */
+    top: -75%;
+    left: -75%;
+    animation: moveClouds 40s linear infinite;
+    pointer-events: none;
+    filter: blur(12px);
+    z-index: 1;
+}
+
+.background-container.soft-red::after {
+    animation-duration: 25s;
+    animation-direction: reverse;
+    opacity: 0.6;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 50%);
+    /* Stronger "Floating light" hotspots */
+}
+
+.background-container.soft-red::after {
+    animation-duration: 35s;
+    animation-direction: reverse;
+    opacity: 0.4;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 50%);
+    /* "Floating light" hotspots */
+}
+
+@keyframes moveClouds {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+.photo-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.floating-photo {
+    position: absolute;
+    width: 200px;
+    height: auto;
+    border: 5px solid var(--white);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    background-color: var(--white);
+    opacity: 0;
+    transition: transform 0.5s ease-out, opacity 1s ease-in;
+}
+
+.message-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: var(--white);
+    z-index: 10;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 2s ease-in-out;
+}
+
+.birthday-text {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+    font-weight: 800;
+}
+
+.love-text {
+    font-size: 2rem;
+    font-style: italic;
+    opacity: 0.9;
+}
+
+/* Animations */
+@keyframes floatAround {
+    0% {
+        transform: translate(0, 0) rotate(0deg) scale(1);
+    }
+
+    33% {
+        transform: translate(30px, -50px) rotate(5deg) scale(1.1);
+    }
+
+    66% {
+        transform: translate(-20px, 40px) rotate(-5deg) scale(0.95);
+    }
+
+    100% {
+        transform: translate(0, 0) rotate(0deg) scale(1);
+    }
+}
+
+.animate {
+    animation: floatAround 10s infinite ease-in-out;
+}
+
+.show {
+    opacity: 1 !important;
+}
+
+/* Particles */
+.particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    /* Above background but below photos */
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--gold);
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0;
+    /* Hidden initially */
+    animation: sparkle 3s infinite ease-in-out;
+    transition: opacity 1s ease-in-out;
+}
+
+.celebration .particle {
+    opacity: 0.8 !important;
+    box-shadow: 0 0 10px var(--gold);
+}
+
+@keyframes sparkle {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.2;
+    }
+
+    50% {
+        transform: scale(1.5);
+        opacity: 0.8;
+    }
+}
+
+/* Hearts */
+.heart {
+    position: absolute;
+    color: rgba(255, 64, 129, 0.7);
+    /* Cute reddish pink */
+    pointer-events: none;
+    font-size: 20px;
+    z-index: 2;
+    animation: floatHearts 15s linear infinite;
+    transition: opacity 1s ease-in-out;
+}
+
+@keyframes floatHearts {
+    0% {
+        transform: translateY(110vh) rotate(0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.8;
+    }
+
+    90% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateY(-10vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Photo Hover */
+.floating-photo {
+    cursor: pointer;
+    pointer-events: auto;
+    /* Enable clicking */
+    transition: transform 0.5s ease-out, opacity 1s ease-in-out, box-shadow 0.3s ease;
+}
+
+.floating-photo:hover {
+    box-shadow: 0 0 20px var(--gold);
+    z-index: 100;
+}
+
+/* Modal Styling */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(60, 0, 0, 0.4);
+    backdrop-filter: blur(5px);
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    position: relative;
+    max-width: 80%;
+    max-height: 80%;
+    text-align: center;
+}
+
+#modal-img {
+    width: auto;
+    max-height: 70vh;
+    border: 8px solid white;
+    border-radius: 12px;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+    transform: scale(0.8);
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.modal.active #modal-img {
+    transform: scale(1);
+}
+
+.modal-caption {
+    color: white;
+    font-size: 2rem;
+    margin-top: 20px;
+    font-style: italic;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+    font-family: 'Outfit', sans-serif;
+}
+
+.close-modal {
+    position: absolute;
+    top: 30px;
+    right: 50px;
+    color: white;
+    font-size: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close-modal:hover {
+    color: var(--light-red);
+}
+
+.fade-out {
+    opacity: 0 !important;
+}
+
+/* Teaser Button */
+.teaser-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    z-index: 50;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.teaser-container.active {
+    display: block;
+    opacity: 1;
+}
+
+.teaser-button {
+    padding: 20px 40px;
+    font-size: 2rem;
+    background-color: #FF4081;
+    /* Pink */
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    font-family: 'Outfit', sans-serif;
+    font-weight: bold;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.3s;
+}
+
+.teaser-button:hover {
+    transform: scale(1.1);
+    background-color: #F50057;
+}
+
+.teaser-button:active {
+    transform: scale(0.95);
+}
